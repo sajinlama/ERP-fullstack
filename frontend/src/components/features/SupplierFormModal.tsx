@@ -89,8 +89,11 @@ export const SupplierFormModal: React.FC<SupplierFormModalProps> = ({
       maxWidth="md"
     >
       {error && (
-        <div className="mb-4 rounded-lg bg-rose-50 p-3 text-xs text-rose-700 border border-rose-200 font-medium">
-          {error}
+        <div className="mb-4 flex items-start gap-2.5 rounded-xl border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-300 font-medium">
+          <svg className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+          </svg>
+          <span>{error}</span>
         </div>
       )}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -124,7 +127,7 @@ export const SupplierFormModal: React.FC<SupplierFormModalProps> = ({
           onChange={(e) => setCountry(e.target.value as Country)}
           options={countryOptions}
         />
-        <div className="mt-6 flex justify-end gap-2.5 pt-4 border-t border-slate-100">
+        <div className="mt-6 flex justify-end gap-2.5 pt-4 border-t border-slate-800">
           <Button type="button" variant="outline" onClick={onClose} disabled={loading}>
             Cancel
           </Button>
@@ -136,3 +139,5 @@ export const SupplierFormModal: React.FC<SupplierFormModalProps> = ({
     </Modal>
   );
 };
+
+export default SupplierFormModal;

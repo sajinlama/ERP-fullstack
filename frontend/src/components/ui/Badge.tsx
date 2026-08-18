@@ -7,26 +7,27 @@ export interface BadgeProps {
 }
 
 export const Badge: React.FC<BadgeProps> = ({ status, className = "" }) => {
-  const configs: Record<SupplierStatus, { text: string; classes: string; dot: string }> = {
+  const configs: Record<SupplierStatus, { text: string; container: string; dot: string; ping?: string }> = {
     APPROVED: {
       text: "Approved",
-      classes: "bg-emerald-50 text-emerald-700 border-emerald-200/80",
-      dot: "bg-emerald-500",
+      container: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.12)]",
+      dot: "bg-emerald-400",
     },
     REJECTED: {
       text: "Rejected",
-      classes: "bg-rose-50 text-rose-700 border-rose-200/80",
-      dot: "bg-rose-500",
+      container: "border-rose-500/30 bg-rose-500/10 text-rose-400 shadow-[0_0_12px_rgba(244,63,94,0.12)]",
+      dot: "bg-rose-400",
     },
     PENDING_APPROVAL: {
       text: "Pending Review",
-      classes: "bg-amber-50 text-amber-800 border-amber-200/80",
-      dot: "bg-amber-500 animate-pulse",
+      container: "border-amber-500/30 bg-amber-500/10 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.12)]",
+      dot: "bg-amber-400",
+      ping: "bg-amber-400",
     },
     DRAFT: {
       text: "Draft",
-      classes: "bg-slate-100 text-slate-700 border-slate-200",
-      dot: "bg-slate-400",
+      container: "border-slate-700/80 bg-slate-800/60 text-slate-400",
+      dot: "bg-slate-500",
     },
   };
 
@@ -34,10 +35,17 @@ export const Badge: React.FC<BadgeProps> = ({ status, className = "" }) => {
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${config.classes} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold backdrop-blur-md transition-all select-none ${config.container} ${className}`}
     >
-      <span className={`h-1.5 w-1.5 rounded-full ${config.dot}`} aria-hidden="true" />
-      {config.text}
+      <span className="relative flex h-1.5 w-1.5 items-center justify-center">
+        {config.ping && (
+          <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${config.ping}`} />
+        )}
+        <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${config.dot}`} aria-hidden="true" />
+      </span>
+      <span>{config.text}</span>
     </span>
   );
 };
+
+export default Badge;

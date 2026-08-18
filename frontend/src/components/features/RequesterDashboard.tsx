@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import api from "../../api/axios";
-import type { Supplier } from "../../types";
+import type{ Supplier } from "../../types";
 import { StatsCard } from "../ui/StatsCard";
-import { DataTable, type Column } from "../ui/DataTable";
+import  { DataTable,type Column } from "../ui/DataTable";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
 import { SupplierFormModal } from "./SupplierFormModal";
@@ -180,5 +180,3 @@ export const RequesterDashboard: React.FC = () => {
     </div>
   );
 };
-
-export default RequesterDashboard;
