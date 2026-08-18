@@ -22,7 +22,6 @@ export const SupplierSchema = z.object({
   rejectionReason: z.string().nullable().optional(),
 });
 
-// Schema for creating a new Supplier (typically in DRAFT state)
 export const CreateSupplierSchema = SupplierSchema.pick({
   companyName: true,
   vatId: true,
@@ -31,19 +30,29 @@ export const CreateSupplierSchema = SupplierSchema.pick({
   createdById: true,
 });
 
-// Schema for approving a Supplier
+
+
 export const ApproveSupplierSchema = z.object({
-  approvedById: z.string().uuid(),
+  supplierId: z.string().uuid("Invalid supplier ID"),
 });
 
 
 
-// Schema for rejecting a Supplier
 export const RejectSupplierSchema = z.object({
-  rejectedById: z.string().uuid(),
-  rejectionReason: z.string().min(3, 'Rejection reason must be provided'),
+  supplierId: z.string().uuid("Invalid supplier ID"),
+  rejectionReason: z
+    .string({
+      error: "Rejection reason is required",
+    })
+    .trim()
+    .min(10, "Rejection reason must be at least 10 characters long")
+    .max(500, "Rejection reason cannot exceed 500 characters"),
 });
 
-export type SupplierInput = z.infer<typeof CreateSupplierSchema>;
+
+
+
 export type ApproveSupplierInput = z.infer<typeof ApproveSupplierSchema>;
 export type RejectSupplierInput = z.infer<typeof RejectSupplierSchema>;
+
+export type SupplierInput = z.infer<typeof CreateSupplierSchema>;

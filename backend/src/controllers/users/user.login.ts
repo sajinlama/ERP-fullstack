@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { asyncHandler } from "../../utils/ayncWrapper.js";
 import { CreateUserSchema } from "../../validators/user.validate.js";
-import userLogin from "../../services/userLogin.js";
+import userLogin from "../../services/users/userLogin.js";
 import { ApiResponse } from "../../utils/apiResponse.js";
 
 const UserLogin = asyncHandler(async (req: Request, res: Response) => {

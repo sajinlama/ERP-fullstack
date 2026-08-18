@@ -1,9 +1,19 @@
-
-import type { Request , Response } from "express";
+import type { Request, Response } from "express";
 import { asyncHandler } from "../../utils/ayncWrapper.js";
+import { SupplierSchema } from "../../validators/suppliers.validate.js";
+import { ApiResponse } from "../../utils/apiResponse.js";
+import { createSupplier } from "../../services/suppliers/CreateSuppliers.service.js";
 
-const newSuppliers = asyncHandler (async(req:Request , res: Response)=>{
 
-})
+export const newSupplierController = asyncHandler(async (req: Request, res: Response) => {
+  const validatedData = SupplierSchema.parse(req.body);
 
-export default newSuppliers;
+
+  const supplier = await createSupplier(validatedData);
+
+  res.status(201).json(
+    new ApiResponse(201, supplier, "Supplier created successfully")
+  );
+});
+
+export default newSupplierController;
