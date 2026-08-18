@@ -17,7 +17,10 @@ export const CreateUserSchema = UserSchema.pick({
   email: true,
   role: true,
 });
-
+export const loginUser = UserSchema.pick({
+  email: true,
+  
+});
 // Schema for updating an existing User
 export const UpdateUserSchema = CreateUserSchema.partial();
 

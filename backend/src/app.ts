@@ -8,7 +8,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: ["http://localhost:5173"],
     credentials: true,
   })
 );
@@ -22,7 +22,6 @@ app.get("/health", (_req: Request, res: Response) => {
 
 app.use("/api/v1", router);
 
-// 4. 404 Not FoundCatch-all
 app.use((_req: Request, res: Response) => {
   res.status(404).json({
     success: false,
@@ -30,7 +29,6 @@ app.use((_req: Request, res: Response) => {
   });
 });
 
-// 5. Global Error Handler (MUST be the last middleware)
 app.use(errorHandler);
 
 export default app;

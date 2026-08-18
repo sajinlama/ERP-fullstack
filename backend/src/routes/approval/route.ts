@@ -3,12 +3,12 @@ import { requireApprover } from "../../middleware/auth.middleware.js";
 import { approveSupplierController, rejectSupplierController } from "../../controllers/SupplierApproval /supplierApproval.js";
 
 
-const router = Router();
+const approveRoutes = Router();
 
-// Protect all approval routes with the approver role check
-router.use(requireApprover);
+// Protect all routes in this router with requireApprover middleware
+approveRoutes.use(requireApprover);
 
-router.post("/approval", approveSupplierController);
-router.post("/reject", rejectSupplierController);
+approveRoutes.post("/approval", approveSupplierController);
+approveRoutes.post("/reject", rejectSupplierController);
 
-export default router;
+export default approveRoutes;

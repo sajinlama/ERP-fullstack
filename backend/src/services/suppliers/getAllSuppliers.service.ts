@@ -12,6 +12,9 @@ export const getAllSuppliers = async () => {
       approvedBy: {
         select: { id: true, name: true, email: true },
       },
+      rejectedBy: {
+        select: { id: true, name: true, email: true },
+      },
     },
   });
 

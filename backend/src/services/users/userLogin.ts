@@ -1,14 +1,16 @@
 import prisma from "../../config/prisma.js";
 import ApiError from "../../utils/api.js";
-import type { UserInput } from "../../validators/user.validate.js";
 
-const userLogin = async (input: UserInput) => {
+export interface UserLoginInput {
+  email: string;
+}
+
+const userLogin = async (input: UserLoginInput) => {
   const { email } = input;
-
 
   const user = await prisma.user.findUnique({
     where: {
-      email: email,
+      email,
     },
   });
 

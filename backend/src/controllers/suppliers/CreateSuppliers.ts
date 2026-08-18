@@ -1,13 +1,11 @@
 import type { Request, Response } from "express";
 import { asyncHandler } from "../../utils/ayncWrapper.js";
-import { SupplierSchema } from "../../validators/suppliers.validate.js";
+import { CreateSupplierSchema } from "../../validators/suppliers.validate.js"; 
 import { ApiResponse } from "../../utils/apiResponse.js";
 import { createSupplier } from "../../services/suppliers/CreateSuppliers.service.js";
 
-
 export const newSupplierController = asyncHandler(async (req: Request, res: Response) => {
-  const validatedData = SupplierSchema.parse(req.body);
-
+  const validatedData = CreateSupplierSchema.parse(req.body);
 
   const supplier = await createSupplier(validatedData);
 
