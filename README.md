@@ -1705,7 +1705,7 @@ POST   /api/v1/approver/reject
 
 ```bash
 # Clone
-git clone <your-repository-url>
+git clone https://github.com/sajinlama/ERP-fullstack.git
 
 # Backend
 cd supplier-management-portal/backend
