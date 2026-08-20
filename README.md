@@ -34,7 +34,6 @@ The platform manages the complete supplier lifecycle while enforcing role-based 
 - [Status Transitions](#status-transitions)
 - [Business Rules](#business-rules)
 - [Audit Trail](#audit-trail)
-- [Testing](#testing)
 - [Production Deployment](#production-deployment)
 - [Security Checklist](#security-checklist)
 - [Troubleshooting](#troubleshooting)
