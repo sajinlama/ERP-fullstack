@@ -1,4 +1,4 @@
-Absolutely — here is the entire README.md as one single file. Copy everything below into a file named README.md.
+
 
 # Supplier Management & Governance Portal (ERP)
 
