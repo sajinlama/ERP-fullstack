@@ -1,13 +1,13 @@
 import { Router } from "express";
-import newSuppliers from "../../controllers/suppliers/CreateSuppliers.js";
 import updateSupplers from "../../controllers/suppliers/updateSuppliers.js";
 import getAllSupplires from "../../controllers/suppliers/getAllSuppliers.js";
 import { getMySuppliersController } from "../../controllers/suppliers/getMySuppliers.controller.js";
+import newSupplierController from "../../controllers/suppliers/CreateSuppliers.js";
 
 
 const router:Router = Router();
 
-router.post("/createsSuppliers",newSuppliers);
+router.post("/createsSuppliers",newSupplierController);
 router.put("/updateSuppliers",updateSupplers);
 router.get("/getSupplires",getAllSupplires);
 router.get("/my-suppliers", getMySuppliersController);
