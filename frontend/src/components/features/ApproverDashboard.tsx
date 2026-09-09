@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import api from "../../api/axios";
-import type { Supplier, SupplierStatus } from "../../types";
+import type { Supplier, } from "../../types";
 import { DataTable, type Column } from "../ui/DataTable";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";

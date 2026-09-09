@@ -1,13 +1,17 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import api from "../../api/axios";
-import type{ Supplier } from "../../types";
+import type { Supplier } from "../../types";
 import { StatsCard } from "../ui/StatsCard";
-import  { DataTable,type Column } from "../ui/DataTable";
+import { DataTable, type Column } from "../ui/DataTable";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
 import { SupplierFormModal } from "./SupplierFormModal";
 
 export const RequesterDashboard: React.FC = () => {
+  // Read role directly from localStorage matching AppLayout
+  const userRole = localStorage.getItem("userRole") || "REQUESTER";
+  const isRequester = userRole === "REQUESTER";
+
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,61 +42,69 @@ export const RequesterDashboard: React.FC = () => {
     };
   }, [suppliers]);
 
-  const columns: Column<Supplier>[] = [
-    {
-      header: "Company Details",
-      cell: (row) => (
-        <div>
-          <p className="font-semibold text-slate-900">{row.companyName}</p>
-          <p className="text-xs text-slate-500 font-mono">{row.vatId}</p>
-        </div>
-      ),
-    },
-    {
-      header: "Country",
-      cell: (row) => <span className="text-slate-600">{row.country.replace(/_/g, " ")}</span>,
-    },
-    {
-      header: "Contact Email",
-      accessorKey: "contactEmail",
-      className: "text-slate-600",
-    },
-    {
-      header: "Status",
-      cell: (row) => <Badge status={row.status} />,
-    },
-    {
-      header: "Audit / Rejection Notes",
-      cell: (row) =>
-        row.rejectionReason ? (
-          <div className="rounded-lg bg-rose-50 border border-rose-200/80 p-2 text-xs text-rose-700 max-w-xs">
-            <strong className="block text-[10px] uppercase font-bold tracking-wider">Reason:</strong>
-            {row.rejectionReason}
+  const columns: Column<Supplier>[] = useMemo(() => {
+    const tableColumns: Column<Supplier>[] = [
+      {
+        header: "Company Details",
+        cell: (row) => (
+          <div>
+            <p className="font-semibold text-slate-900">{row.companyName}</p>
+            <p className="text-xs text-slate-500 font-mono">{row.vatId}</p>
           </div>
-        ) : (
-          <span className="text-slate-400 text-xs">—</span>
         ),
-    },
-    {
-      header: "Actions",
-      className: "text-right",
-      cell: (row) =>
-        row.status !== "APPROVED" ? (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => {
-              setEditingSupplier(row);
-              setIsModalOpen(true);
-            }}
-          >
-            Edit
-          </Button>
-        ) : (
-          <span className="text-xs text-slate-400">Locked</span>
-        ),
-    },
-  ];
+      },
+      {
+        header: "Country",
+        cell: (row) => <span className="text-slate-600">{row.country.replace(/_/g, " ")}</span>,
+      },
+      {
+        header: "Contact Email",
+        accessorKey: "contactEmail",
+        className: "text-slate-600",
+      },
+      {
+        header: "Status",
+        cell: (row) => <Badge status={row.status} />,
+      },
+      {
+        header: "Audit / Rejection Notes",
+        cell: (row) =>
+          row.rejectionReason ? (
+            <div className="rounded-lg bg-rose-50 border border-rose-200/80 p-2 text-xs text-rose-700 max-w-xs">
+              <strong className="block text-[10px] uppercase font-bold tracking-wider">Reason:</strong>
+              {row.rejectionReason}
+            </div>
+          ) : (
+            <span className="text-slate-400 text-xs">—</span>
+          ),
+      },
+    ];
+
+    // Only attach Actions column when role is NOT REQUESTER
+    if (!isRequester) {
+      tableColumns.push({
+        header: "Actions",
+        className: "text-right",
+        cell: (row) =>
+          row.status !== "APPROVED" ? (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setEditingSupplier(row);
+                setIsModalOpen(true);
+              }}
+            >
+              Edit
+            </Button>
+          ) : (
+            <span className="text-xs text-slate-400">Locked</span>
+          ),
+      });
+    }
+
+    return tableColumns;
+  }, [isRequester]);
 
   return (
     <div className="space-y-6">
