@@ -1,7 +1,7 @@
 import { Router } from "express";
 import authRoutes from "./user/user.router.js";
-import supplierRoutes from "./suppliersRoutes/route.suppliers.js";
-import approveRoutes from "./approval/route.js"
+import supplierRoutes from "./suppliers/suppliers.routes.js";
+import approveRoutes from "./approval/approval.Routes.js";
 
 
 
