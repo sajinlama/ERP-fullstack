@@ -301,7 +301,7 @@ supplier-management-portal/
 │   │   ├── app.ts
 │   │   └── server.ts
 │   │
-│   ├── tests/
+│ 
 │   ├── .env
 │   ├── package.json
 │   └── tsconfig.json
