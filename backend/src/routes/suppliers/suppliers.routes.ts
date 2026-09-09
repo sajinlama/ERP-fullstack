@@ -1,8 +1,8 @@
 import { Router } from "express";
-import updateSupplers from "../../controllers/suppliers/updateSuppliers.js";
-import getAllSupplires from "../../controllers/suppliers/getAllSuppliers.js";
+import updateSupplers from "../../controllers/suppliers/updateSuppliers.controller.js";
+import getAllSupplires from "../../controllers/suppliers/getAllSuppliers.controller.js";
 import { getMySuppliersController } from "../../controllers/suppliers/getMySuppliers.controller.js";
-import newSupplierController from "../../controllers/suppliers/createSuppliers.js";
+import newSupplierController from "../../controllers/suppliers/createSuppliers..controller.js";
 
 
 const router:Router = Router();

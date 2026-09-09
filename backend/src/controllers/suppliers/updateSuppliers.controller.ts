@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { asyncHandler } from "../../utils/ayncWrapper.js";
 import { UpdateSupplierSchema } from "../../validators/suppliers.validate.js";
-import updateSupplier from "../../services/suppliers/update.service.js";
+import updateSupplier from "../../services/suppliers/supplierUpdate.service.js";
 import { ApiResponse } from "../../utils/apiResponse.js";
 
 const updateSuppliers = asyncHandler(async (req: Request, res: Response) => {
